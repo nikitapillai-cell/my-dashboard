@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monday Check-In — Contest Applications</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF5FA2;
+    --yellow: #FFDE59;
+    --teal: #00C2B8;
+    --cobalt: #2E3AF2;
+    --ink: #17171A;
+    --cream: #FDF6E7;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Scattered Memphis background shapes */
+  .bg-shape {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .grid-dots {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 220px;
+    background-image: radial-gradient(var(--ink) 2px, transparent 2px);
+    background-size: 26px 26px;
+    opacity: 0.08;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 24px 90px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    color: var(--yellow);
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 40px;
+    transform: rotate(-3deg);
+    margin-bottom: 22px;
+  }
+
+  h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    line-height: 1.05;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+
+  h1 .highlight {
+    position: relative;
+    display: inline-block;
+    color: var(--ink);
+  }
+
+  h1 .highlight::after {
+    content: "";
+    position: absolute;
+    left: -4px; right: -4px; bottom: 6px;
+    height: 16px;
+    background: var(--yellow);
+    z-index: -1;
+    transform: skewX(-8deg);
+  }
+
+  .subhead {
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin: 0 auto;
+    color: #45454b;
+    line-height: 1.55;
+  }
+
+  .day-strip {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 28px 0 0;
+  }
+
+  .day-pill {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 7px 14px;
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    background: white;
+    color: var(--ink);
+  }
+
+  .day-pill.active {
+    background: var(--pink);
+    color: white;
+    transform: scale(1.12);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+
+  @media (max-width: 620px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    position: relative;
+    background: white;
+    border: 3px solid var(--ink);
+    border-radius: 18px;
+    padding: 26px 24px 24px;
+    box-shadow: 8px 8px 0 var(--ink);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .card:nth-child(1) { transform: rotate(-1.4deg); }
+  .card:nth-child(2) { transform: rotate(1.6deg); }
+  .card:nth-child(3) { transform: rotate(1.1deg); }
+  .card:nth-child(4) { transform: rotate(-1.8deg); }
+
+  .card:hover {
+    transform: translate(-3px, -3px) rotate(0deg);
+    box-shadow: 12px 12px 0 var(--ink);
+  }
+
+  .card-number {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 14px;
+  }
+
+  .card:nth-child(1) .card-number { background: var(--pink); }
+  .card:nth-child(2) .card-number { background: var(--cobalt); }
+  .card:nth-child(3) .card-number { background: var(--teal); }
+  .card:nth-child(4) .card-number { background: var(--ink); }
+
+  .card h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+
+  .card p {
+    font-size: 0.88rem;
+    color: #5a5a62;
+    margin: 0 0 18px;
+    word-break: break-all;
+  }
+
+  .card a.go {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--yellow);
+    border: 2.5px solid var(--ink);
+    padding: 9px 16px;
+    border-radius: 10px;
+  }
+
+  .card a.go:hover { background: var(--pink); color: white; }
+
+  .card a.go svg { width: 14px; height: 14px; }
+
+  footer {
+    text-align: center;
+    margin-top: 56px;
+  }
+
+  .footer-note {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: #6b6b72;
+    background: white;
+    border: 2px dashed var(--ink);
+    border-radius: 14px;
+    padding: 14px 22px;
+    max-width: 480px;
+  }
+
+  .zigzag {
+    height: 22px;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--teal),
+      var(--teal) 10px,
+      var(--yellow) 10px,
+      var(--yellow) 20px
+    );
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    margin: 40px -24px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="grid-dots"></div>
+
+  <!-- decorative Memphis shapes -->
+  <svg class="bg-shape" style="top:60px; left:20px; width:70px;" viewBox="0 0 100 100"><polygon points="50,5 95,90 5,90" fill="none" stroke="#2E3AF2" stroke-width="6"/></svg>
+  <svg class="bg-shape" style="top:120px; right:40px; width:60px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#FF5FA2" stroke-width="7"/></svg>
+  <svg class="bg-shape" style="bottom:120px; left:5%; width:90px;" viewBox="0 0 140 60"><path d="M5,30 Q35,5 70,30 T135,30" fill="none" stroke="#00C2B8" stroke-width="7" stroke-linecap="round"/></svg>
+  <svg class="bg-shape" style="bottom:60px; right:6%; width:50px;" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" fill="#FFDE59" stroke="#17171A" stroke-width="5" transform="rotate(12 50 50)"/></svg>
+  <svg class="bg-shape" style="top:300px; left:2%; width:36px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FF5FA2"/></svg>
+  <svg class="bg-shape" style="top:400px; right:3%; width:40px;" viewBox="0 0 100 100"><polygon points="50,5 95,90 5,90" fill="#2E3AF2"/></svg>
+
+  <div class="wrap">
+
+    <header>
+      <div class="badge">⏰ Weekly check-in</div>
+      <h1>Every <span class="highlight">Monday</span>,<br>go apply.</h1>
+      <p class="subhead">Four open show applications worth a fresh look each week. Click through, check for new tapings, and submit while seats are open.</p>
+
+      <div class="day-strip">
+        <span class="day-pill">SUN</span>
+        <span class="day-pill active">MON</span>
+        <span class="day-pill">TUE</span>
+        <span class="day-pill">WED</span>
+        <span class="day-pill">THU</span>
+        <span class="day-pill">FRI</span>
+        <span class="day-pill">SAT</span>
+      </div>
+    </header>
+
+    <div class="zigzag"></div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-number">1</div>
+        <h2>Application — Show 402</h2>
+        <p>sroaudiences.com/application.asp?show_id=402</p>
+        <a class="go" href="https://www.sroaudiences.com/application.asp?show_id=402" target="_blank" rel="noopener">
+          Open application
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-number">2</div>
+        <h2>Application — Show 680</h2>
+        <p>sroaudiences.com/application.asp?show_id=680</p>
+        <a class="go" href="https://www.sroaudiences.com/application.asp?show_id=680" target="_blank" rel="noopener">
+          Open application
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-number">3</div>
+        <h2>Application — Show 1032</h2>
+        <p>sroaudiences.com/application.asp?show_id=1032</p>
+        <a class="go" href="https://www.sroaudiences.com/application.asp?show_id=1032" target="_blank" rel="noopener">
+          Open application
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-number">4</div>
+        <h2>Application — Show 1057</h2>
+        <p>sroaudiences.com/application.asp?show_id=1057</p>
+        <a class="go" href="https://www.sroaudiences.com/application.asp?show_id=1057" target="_blank" rel="noopener">
+          Open application
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <footer>
+      <div class="footer-note">
+        Bookmark this page or add it to your Monday routine — an HTML file can't send you a notification on its own, so pairing it with a recurring calendar reminder is the most reliable way to make sure you actually open it each week.
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

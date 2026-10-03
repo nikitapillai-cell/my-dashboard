@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lenny's Archive, Decoded</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#FF3B7F;
+    --blue:#0047FF;
+    --yellow:#FFD400;
+    --teal:#00C2A8;
+    --orange:#FF6B1A;
+    --purple:#7B2FFF;
+    --black:#111111;
+    --cream:#FFF7EC;
+    --paper:#FFFFFF;
+    --line: 3px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    font-family:'Space Grotesk', sans-serif;
+    color:var(--black);
+    overflow-x:hidden;
+    position:relative;
+  }
+  h1,h2,h3,.display{
+    font-family:'Archivo Black', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    line-height:1.05;
+  }
+  a{color:inherit;}
+
+  /* ---------- background confetti ---------- */
+  .confetti-layer{
+    position:absolute;
+    top:0;left:0;right:0;
+    height:100%;
+    pointer-events:none;
+    z-index:0;
+    overflow:hidden;
+  }
+  .confetti-shape{position:absolute; opacity:0.9;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:70px 24px 90px;
+    background:var(--blue);
+    overflow:hidden;
+    border-bottom:var(--line) solid var(--black);
+  }
+  .hero-inner{
+    max-width:1100px;
+    margin:0 auto;
+    position:relative;
+    z-index:2;
+  }
+  .eyebrow-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--yellow);
+    border:var(--line) solid var(--black);
+    padding:6px 16px;
+    border-radius:40px;
+    font-weight:700;
+    font-size:13px;
+    transform:rotate(-2deg);
+    box-shadow:5px 5px 0 var(--black);
+    margin-bottom:26px;
+  }
+  .hero h1{
+    color:var(--cream);
+    font-size:clamp(38px, 7vw, 84px);
+    margin:0 0 18px;
+    text-shadow: 4px 4px 0 var(--black);
+  }
+  .hero h1 .pop{
+    color:var(--yellow);
+    -webkit-text-stroke: 2px var(--black);
+  }
+  .hero p.sub{
+    color:var(--cream);
+    font-size:clamp(16px,2.4vw,21px);
+    max-width:640px;
+    font-weight:500;
+    margin:0 0 34px;
+  }
+  .stat-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .stat-chip{
+    background:var(--paper);
+    border:var(--line) solid var(--black);
+    border-radius:14px;
+    padding:14px 20px;
+    box-shadow:6px 6px 0 var(--black);
+    min-width:140px;
+  }
+  .stat-chip .num{
+    font-family:'Archivo Black', sans-serif;
+    font-size:30px;
+    color:var(--pink);
+    display:block;
+  }
+  .stat-chip .lbl{
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+  }
+
+  /* squiggle divider */
+  .squiggle-wrap{
+    line-height:0;
+    margin-top:-2px;
+    position:relative;
+    z-index:2;
+  }
+  .squiggle-wrap svg{display:block; width:100%; height:60px;}
+
+  /* ---------- SECTION WRAPPER ---------- */
+  section{
+    position:relative;
+    max-width:1200px;
+    margin:0 auto;
+    padding:70px 24px;
+    z-index:1;
+  }
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:38px;
+  }
+  .section-head h2{
+    font-size:clamp(28px,4.5vw,46px);
+    margin:0;
+    position:relative;
+    display:inline-block;
+  }
+  .section-head h2 .underline-shape{
+    position:absolute;
+    left:0; bottom:-10px;
+    width:100%;
+  }
+  .section-tag{
+    font-weight:700;
+    font-size:13px;
+    text-transform:uppercase;
+    background:var(--black);
+    color:var(--cream);
+    padding:8px 14px;
+    border-radius:30px;
+    transform:rotate(2deg);
+  }
+  .section-intro{
+    max-width:720px;
+    font-size:16px;
+    font-weight:500;
+    margin:0 0 10px;
+  }
+
+  /* ---------- CATEGORY GRID ---------- */
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:26px;
+  }
+  .cat-card{
+    background:var(--paper);
+    border:var(--line) solid var(--black);
+    border-radius:20px;
+    padding:0;
+    box-shadow:8px 8px 0 var(--black);
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .cat-card:hover{
+    transform:translate(-3px,-3px);
+    box-shadow:11px 11px 0 var(--black);
+  }
+  .cat-card .cat-top{
+    padding:22px 22px 18px;
+    position:relative;
+  }
+  .cat-card .cat-shape{
+    position:absolute;
+    top:12px; right:14px;
+    width:46px; height:46px;
+  }
+  .cat-num{
+    font-family:'Archivo Black', sans-serif;
+    font-size:13px;
+    display:inline-block;
+    border:2px solid var(--black);
+    border-radius:50%;
+    width:30px;height:30px;
+    line-height:26px;
+    text-align:center;
+    margin-bottom:14px;
+    background:var(--yellow);
+  }
+  .cat-card h3{
+    font-size:20px;
+    margin:0 0 10px;
+    padding-right:40px;
+  }
+  .cat-card .cat-teaser{
+    font-size:14px;
+    font-weight:500;
+    margin:0;
+    opacity:0.85;
+  }
+  .cat-card .cat-expand-hint{
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    margin-top:14px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .cat-card .cat-expand-hint .arrow{
+    transition:transform .2s ease;
+    display:inline-block;
+  }
+  .cat-card.open .cat-expand-hint .arrow{
+    transform:rotate(180deg);
+  }
+  .cat-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    border-top:0px solid var(--black);
+  }
+  .cat-card.open .cat-body{
+    border-top:var(--line) solid var(--black);
+  }
+  .cat-body-inner{
+    padding:20px 22px 24px;
+  }
+  .learning-item{
+    display:flex;
+    gap:12px;
+    margin-bottom:16px;
+    align-items:flex-start;
+  }
+  .learning-item:last-child{margin-bottom:0;}
+  .learning-bullet{
+    flex-shrink:0;
+    width:22px;height:22px;
+    border-radius:6px;
+    border:2px solid var(--black);
+    margin-top:2px;
+  }
+  .learning-text{
+    font-size:14.5px;
+    font-weight:500;
+    line-height:1.5;
+  }
+  .learning-text b{font-weight:700;}
+  .fnote{
+    font-size:11px;
+    font-weight:700;
+    vertical-align:super;
+    color:var(--pink);
+    text-decoration:none;
+    margin-left:2px;
+  }
+
+  /* ---------- AI TOOLS SECTION ---------- */
+  .tools-section{
+    background:var(--black);
+    color:var(--cream);
+  }
+  .tools-section .section-tag{
+    background:var(--yellow);
+    color:var(--black);
+  }
+  .tools-section .section-intro{color:var(--cream); opacity:0.9;}
+  .tool-groups{
+    display:flex;
+    flex-direction:column;
+    gap:34px;
+  }
+  .tool-group{
+    background:#1B1B1B;
+    border:var(--line) solid var(--cream);
+    border-radius:20px;
+    padding:24px 24px 8px;
+  }
+  .tool-group-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+  }
+  .tool-group-icon{
+    width:44px;height:44px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid var(--black);
+    flex-shrink:0;
+  }
+  .tool-group-head h3{
+    font-size:19px;
+    margin:0;
+    color:var(--cream);
+  }
+  .tool-group-desc{
+    font-size:13px;
+    opacity:0.75;
+    font-weight:500;
+    margin:2px 0 0;
+  }
+  .tool-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:14px;
+    margin-bottom:20px;
+  }
+  .tool-card{
+    background:var(--cream);
+    color:var(--black);
+    border:2px solid var(--black);
+    border-radius:14px;
+    padding:14px 16px;
+    text-decoration:none;
+    display:block;
+    box-shadow:4px 4px 0 var(--black);
+    transition:transform .12s ease, box-shadow .12s ease;
+    position:relative;
+  }
+  .tool-card:hover{
+    transform:translate(-2px,-2px);
+    box-shadow:6px 6px 0 var(--black);
+  }
+  .tool-card .tool-name{
+    font-weight:700;
+    font-size:15.5px;
+    margin-bottom:4px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .tool-card .tool-name .go{
+    font-size:12px;
+    background:var(--black);
+    color:var(--cream);
+    border-radius:50%;
+    width:20px;height:20px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .tool-card .tool-use{
+    font-size:12.5px;
+    font-weight:500;
+    opacity:0.85;
+    line-height:1.4;
+  }
+  .tool-card .tool-tag{
+    display:inline-block;
+    margin-top:8px;
+    font-size:10.5px;
+    font-weight:700;
+    text-transform:uppercase;
+    padding:3px 8px;
+    border-radius:20px;
+    border:1.5px solid var(--black);
+  }
+
+  /* ---------- FOOTNOTES ---------- */
+  .footnotes{
+    background:var(--cream);
+    border-top:var(--line) solid var(--black);
+    padding:50px 24px 80px;
+  }
+  .footnotes-inner{max-width:1200px; margin:0 auto;}
+  .footnotes h2{font-size:24px; margin-bottom:20px;}
+  .footnote-cols{
+    columns:2;
+    column-gap:40px;
+  }
+  @media (max-width:720px){ .footnote-cols{columns:1;} }
+  .footnote-row{
+    font-size:12.5px;
+    font-weight:500;
+    margin-bottom:10px;
+    break-inside:avoid;
+    padding-left:20px;
+    text-indent:-20px;
+  }
+  .footnote-row b{color:var(--pink);}
+
+  /* ---------- METHOD NOTE ---------- */
+  .method-note{
+    background:var(--teal);
+    border:var(--line) solid var(--black);
+    border-radius:18px;
+    padding:22px 26px;
+    box-shadow:7px 7px 0 var(--black);
+    font-size:14px;
+    font-weight:500;
+    margin-top:40px;
+  }
+  .method-note b{font-family:'Archivo Black',sans-serif; font-size:13px; text-transform:uppercase; display:block; margin-bottom:6px;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:600px){
+    .stat-chip{min-width:120px;}
+    section{padding:50px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div class="confetti-layer" id="heroConfetti"></div>
+  <div class="hero-inner">
+    <div class="eyebrow-badge">✦ 297 EPISODES, DECODED ✦</div>
+    <h1>LENNY'S<br>ARCHIVE<span class="pop">.</span><br>THE <span class="pop">LEARNINGS</span>.</h1>
+    <p class="sub">Every guest from Lenny's Podcast archive going back beyond the last 7 months, sorted into 8 topic clusters, plus the AI tool stack worth actually using right now, all in one scroll.</p>
+    <div class="stat-row">
+      <div class="stat-chip"><span class="num">297</span><span class="lbl">Episodes analyzed</span></div>
+      <div class="stat-chip"><span class="num">282</span><span class="lbl">Guests covered</span></div>
+      <div class="stat-chip"><span class="num">8</span><span class="lbl">Topic clusters</span></div>
+      <div class="stat-chip"><span class="num">20+</span><span class="lbl">AI tools mapped</span></div>
+    </div>
+  </div>
+</div>
+<div class="squiggle-wrap">
+  <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,30 Q30,0 60,30 T120,30 T180,30 T240,30 T300,30 T360,30 T420,30 T480,30 T540,30 T600,30 T660,30 T720,30 T780,30 T840,30 T900,30 T960,30 T1020,30 T1080,30 T1140,30 T1200,30 L1200,60 L0,60 Z" fill="#FFF7EC" stroke="#111111" stroke-width="3"/>
+  </svg>
+</div>
+
+<!-- ================= INTRO / METHOD ================= -->
+<section id="intro">
+  <div class="section-intro" style="max-width:800px; font-size:17px;">
+    This covers the archive from about <b>7 months back through the beginning</b> of Lenny's Podcast, not the last 7 months of episodes (those are the ones you've likely already caught live). Categories below are grouped by theme, not chronology, since a Marty Cagan episode from three years ago sits next to an Elena Verna episode from last month if they're making the same point.
+  </div>
+  <div class="method-note">
+    <b>How this was built</b>
+    Every transcript's guest introduction was extracted and read to build the topic map, then flagship episodes per topic were mined directly for the specific frameworks, numbers, and quotes below. Every learning is tagged to the guest and episode it came from, footnoted at the bottom, no fact is generalized beyond what that guest actually said in that episode.
+  </div>
+</section>
+
+<!-- ================= CATEGORY SECTION ================= -->
+<section id="learnings">
+  <div class="section-head">
+    <h2>The 8 Clusters</h2>
+    <div class="section-tag">Tap a card to expand</div>
+  </div>
+  <div class="cat-grid" id="catGrid"><!-- injected by JS --></div>
+</section>
+
+<!-- ================= AI TOOLS SECTION ================= -->
+<section class="tools-section" id="tools">
+  <div class="section-head">
+    <h2 style="color:#FFF7EC;">The AI Stack</h2>
+    <div class="section-tag">Click any card, opens live</div>
+  </div>
+  <p class="section-intro">Organized by job to be done, not by hype. Rankings below reflect a synthesis of independent 2026 comparisons (footnoted), current as of August 2026, the field moves fast enough that it's worth re-checking every quarter.</p>
+  <div class="tool-groups" id="toolGroups"><!-- injected by JS --></div>
+</section>
+
+<!-- ================= FOOTNOTES ================= -->
+<div class="footnotes">
+  <div class="footnotes-inner">
+    <h2>Footnotes &amp; Sources</h2>
+    <div class="footnote-cols" id="footnoteCols"><!-- injected by JS --></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const COLORS = ['#FF3B7F','#0047FF','#FFD400','#00C2A8','#FF6B1A','#7B2FFF','#FF3B7F','#0047FF'];
+
+const SHAPES = [
+  // 0 starburst
+  `<svg viewBox="0 0 46 46"><path d="M23 0 L28 16 L46 12 L32 24 L46 34 L28 30 L23 46 L18 30 L0 34 L14 24 L0 12 L18 16 Z" fill="{c}" stroke="#111" stroke-width="2.5"/></svg>`,
+  // 1 circle w ring
+  `<svg viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="{c}" stroke="#111" stroke-width="2.5"/><circle cx="23" cy="23" r="7" fill="#FFF7EC" stroke="#111" stroke-width="2"/></svg>`,
+  // 2 triangle
+  `<svg viewBox="0 0 46 46"><polygon points="23,3 44,40 2,40" fill="{c}" stroke="#111" stroke-width="2.5"/></svg>`,
+  // 3 squiggle blob
+  `<svg viewBox="0 0 46 46"><path d="M6 20 Q6 4 23 6 Q42 8 40 24 Q38 42 20 40 Q2 38 6 20 Z" fill="{c}" stroke="#111" stroke-width="2.5"/></svg>`,
+  // 4 zigzag
+  `<svg viewBox="0 0 46 46"><polyline points="2,10 14,22 2,34" fill="none" stroke="{c}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><polyline points="20,10 32,22 20,34" fill="none" stroke="{c}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><polyline points="2,10 14,22 2,34" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="20,10 32,22 20,34" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  // 5 diamond
+  `<svg viewBox="0 0 46 46"><rect x="8" y="8" width="30" height="30" fill="{c}" stroke="#111" stroke-width="2.5" transform="rotate(45 23 23)"/></svg>`,
+  // 6 half circle
+  `<svg viewBox="0 0 46 46"><path d="M4 40 A19 19 0 0 1 42 40 Z" fill="{c}" stroke="#111" stroke-width="2.5"/></svg>`,
+  // 7 flower
+  `<svg viewBox="0 0 46 46"><g fill="{c}" stroke="#111" stroke-width="2"><circle cx="23" cy="10" r="8"/><circle cx="23" cy="36" r="8"/><circle cx="10" cy="23" r="8"/><circle cx="36" cy="23" r="8"/></g><circle cx="23" cy="23" r="7" fill="#FFF7EC" stroke="#111" stroke-width="2"/></svg>`
+];
+
+function shapeSvg(i,color){ return SHAPES[i % SHAPES.length].replaceAll('{c}', color); }
+
+const CATEGORIES = [
+  {
+    title:"Product Strategy &amp; Prioritization",
+    teaser:"What actually separates an empowered product team from a project-management job wearing a PM title.",
+    learnings:[
+      `Marty Cagan calls out what he calls <b>"product management theater"</b>: a lot of PMs are really project managers sitting on feature teams, and the tell is that they can't defend the role's value to a CEO in plain language.<a class="fnote" href="#fn1">[1]</a>`,
+      `Cagan pins the current squeeze on three forces landing at once: pandemic-era overhiring, a higher cost of capital, and AI capability quietly eating the execution-only slice of the PM job.<a class="fnote" href="#fn1">[1]</a>`,
+      `Gibson Biddle's Netflix-honed strategy lesson for B2B: switching costs, not delight, are often the real moat, and users will happily tolerate 10 to 14 hours a day of complexity that would never fly in a consumer product.<a class="fnote" href="#fn2">[2]</a>`,
+      `Teresa Torres's <b>Opportunity Solution Tree</b>: one outcome at the root, branching into opportunities, then into solutions and assumption tests, built specifically to pull teams from an output focus toward an outcome focus.<a class="fnote" href="#fn3">[3]</a>`,
+      `Casey Winters maps PMs on a spectrum: "crazy innovator" types throw off constant ideas (most bad, one in ten a real winner) but rarely execute; the opposite end executes beautifully but misses the industry shifts.<a class="fnote" href="#fn4">[4]</a>`
+    ]
+  },
+  {
+    title:"Growth Loops &amp; the AI Distribution Shift",
+    teaser:"Where growth is actually moving now that AI agents are becoming a distribution channel of their own.",
+    learnings:[
+      `Sean Ellis on what <b>"growth hacking"</b> originally meant, before the internet flattened it: not one-off tricks, but scrutinizing every single activity's real impact on sustainable growth.<a class="fnote" href="#fn5">[5]</a>`,
+      `The <b>Sean Ellis Test</b> (percent of users who'd be "very disappointed" without your product) took one of his mobile-security clients from 7% to 40% in two weeks, once he repositioned the whole product around the one feature people actually valued.<a class="fnote" href="#fn5">[5]</a>`,
+      `Brian Balfour's <b>"smile curve"</b>: retention that dips then climbs back up is an early tell that a platform is about to hit escape velocity, he points to ChatGPT's memory feature as the clearest live example right now.<a class="fnote" href="#fn6">[6]</a>`,
+      `Balfour's read on AI platforms broadly: distribution power goes to whoever has the best retention and engagement, not whoever has the most reach today, the same pattern that let Google and Facebook out-compete bigger but shallower rivals.<a class="fnote" href="#fn6">[6]</a>`,
+      `Elena Verna, now leading growth at Lovable, on the newest flavor of PLG: give the product away free to the AI agents inside your ecosystem so they redistribute it for you, funded by real revenue, not a VC-subsidized land grab.<a class="fnote" href="#fn7">[7]</a>`
+    ]
+  },
+  {
+    title:"Building With AI",
+    teaser:"How the people actually building agentic coding tools think about the wave they're riding.",
+    learnings:[
+      `Amjad Masad built Replit's agent as literally another "user" inside Replit's existing multiplayer coding system, so you watch it work inside a full IDE rather than a chat box, database migrations were still its weak spot as of this taping.<a class="fnote" href="#fn8">[8]</a>`,
+      `Scott Wu (Cognition, makers of Devin) notices nearly every breakout AI-native product carries a different name from its parent company, Cursor from Anysphere, v0 from Vercel, because the winning product usually emerged from experimentation, not the founding plan. Devin itself started as a Thanksgiving hackathon in a rented Airbnb.<a class="fnote" href="#fn9">[9]</a>`,
+      `Mike Krieger, Anthropic's Chief Product Officer, says his own belief that models could hold an independent point of view specifically flipped with the release of Opus 4, before that he assumed AI could produce code but not opinions, Claude is now his actual go-to product strategy partner.<a class="fnote" href="#fn10">[10]</a>`
+    ]
+  },
+  {
+    title:"Leadership, Coaching &amp; Resilience",
+    teaser:"The frameworks execs and coaches actually use in the room, not the LinkedIn-post version.",
+    learnings:[
+      `Kim Scott's <b>Radical Candor</b>, precisely defined: care personally and challenge directly, at the same time, on a 2x2. Drop "care personally" and keep challenging, and you get "obnoxious aggression," not radical candor.<a class="fnote" href="#fn11">[11]</a>`,
+      `Jerry Colonna's self-inquiry question for leaders stuck in a rut: <i>"How have I been complicit in creating the conditions I say I don't want?"</i> He's precise that complicit means accomplice, not culprit, the point is to surface your own agency, not assign blame.<a class="fnote" href="#fn12">[12]</a>`,
+      `Colonna's coaching equation, sketched on a whiteboard at Naropa University and still in daily use: practical skills + radical self-inquiry + shared experience = enhanced leadership + resilience.<a class="fnote" href="#fn12">[12]</a>`,
+      `Phyl Terry's <b>"Never Search Alone"</b> method for job hunts (and by extension, fundraising or hiring) traces back over 60 years to his mother's teacher support council in the San Fernando Valley, which met for 50 straight years.<a class="fnote" href="#fn17">[17]</a>`
+    ]
+  },
+  {
+    title:"Founder Playbooks",
+    teaser:"How the people who actually built category-defining companies made the calls that mattered.",
+    learnings:[
+      `Tobi Lütke's <b>"Tobi tornado"</b> at Shopify: a compressed burst of real talk that can kill a project on the spot, the team doesn't treat the cancellation as failure, they immediately become "founders" of the next version, built differently.<a class="fnote" href="#fn13">[13]</a>`,
+      `Lütke's broader operating belief: there's no fixed speed limit on personal growth, school teaches fixed-time, variable-outcome learning, which he argues maps to nothing about how people actually learn, Shopify has been his live experiment proving it.<a class="fnote" href="#fn13">[13]</a>`
+    ]
+  },
+  {
+    title:"Positioning &amp; Go-To-Market",
+    teaser:"Why most sales pitches fail before the first slide, and what to build instead.",
+    learnings:[
+      `April Dunford's core diagnosis of most sales pitches: they're a "glorified product tour," click every dropdown, list every feature, with zero actual positioning inside them.<a class="fnote" href="#fn14">[14]</a>`,
+      `Her fix: translate the positioning into a pitch structure built around the value a feature delivers, not the feature itself, then test that pitch live with real prospects before rolling it out broadly.<a class="fnote" href="#fn14">[14]</a>`,
+      `Andy Raskin rejects the classic "arrogant doctor" pitch (here's your pain, here's my cure, here's why I beat the other cures) for a strategic narrative built like a movie, a shift from an "old game" to a "new game" that becomes the CEO's north star across product, sales, and fundraising.<a class="fnote" href="#fn15">[15]</a>`
+    ]
+  },
+  {
+    title:"Pricing &amp; Experimentation",
+    teaser:"Why product-market fit isn't the finish line if nobody's tested what people will actually pay.",
+    learnings:[
+      `Madhavan Ramanujam's reframe: chase "product-market-<b>pricing</b>-fit," not just product-market fit, price is a measure of value the same way a liter is a measure of volume, and skipping pricing out of your PMF validation usually just means you're hearing what you want to hear.<a class="fnote" href="#fn16">[16]</a>`,
+      `His practical rule: run willingness-to-pay conversations early, willingness to pay is the real proxy for whether people value your product and how badly they want it, not survey enthusiasm.<a class="fnote" href="#fn16">[16]</a>`
+    ]
+  },
+  {
+    title:"Design &amp; Product Craft",
+    teaser:"What separates craft from decoration, straight from people who've run design orgs at scale.",
+    learnings:[
+      `Katie Dill's hardest leadership lesson, a month into leading Airbnb's design org: five of her own team plus an HR partner called an intervention meeting to tell her what wasn't working, she still calls it the single biggest learning moment of her leadership career.<a class="fnote" href="#fn18">[18]</a>`,
+      `Dill on "beauty" in product: it isn't the opposite of functionality, beauty enhances usability by making something feel like it was made for you, craft and utility compound rather than trade off.<a class="fnote" href="#fn18">[18]</a>`
+    ]
+  }
+];
+
+const TOOL_GROUPS = [
+  {
+    name:"Build &amp; Prototype",
+    desc:"For turning a partner concept or product idea into something clickable, fast.",
+    shapeIdx:0,
+    tools:[
+      {name:"Cursor", url:"https://cursor.com", use:"AI-native code editor, the default daily driver for fast in-editor edits.", tag:"Most popular"},
+      {name:"Claude Code", url:"https://claude.com/product/claude-code", use:"Terminal-native agent, strongest for deep multi-file reasoning and autonomous end-to-end feature work.", tag:"Deepest reasoning"},
+      {name:"Replit", url:"https://replit.com", use:"Full IDE plus an agent that codes alongside you as a visible teammate, great for non-engineers prototyping from zero.", tag:"No-code friendly"},
+      {name:"Lovable", url:"https://lovable.dev", use:"Prompt-to-working-app builder, fastest path from an idea to a clickable prototype to show a partner.", tag:"Fastest MVP"},
+      {name:"v0 by Vercel", url:"https://v0.dev", use:"Chat-to-UI generator, best for quickly mocking up an interface, landing page, or partner-facing screen.", tag:"UI mockups"},
+      {name:"Windsurf (Devin Desktop)", url:"https://windsurf.com", use:"Budget AI IDE, folded into Cognition's Devin family in June 2026, still the most generous free tier.", tag:"Best value"}
+    ]
+  },
+  {
+    name:"Research &amp; Everyday Assistant",
+    desc:"General-purpose thinking partner, and where to go for a defensible, cited number.",
+    shapeIdx:1,
+    tools:[
+      {name:"Claude", url:"https://claude.ai", use:"Best for long documents, careful synthesis, and writing that holds its structure across real length.", tag:"Best for synthesis"},
+      {name:"ChatGPT", url:"https://chatgpt.com", use:"Broadest all-rounder across everyday tasks, the most mature ecosystem of connected apps.", tag:"Broadest range"},
+      {name:"Perplexity", url:"https://perplexity.ai", use:"Purpose-built for cited, sourced answers, reach for this when you need to defend a number to a partner or exec.", tag:"Best citations"},
+      {name:"Gemini", url:"https://gemini.google.com", use:"Strongest pick if your day already lives inside Google Workspace, and for very long context windows.", tag:"Workspace-native"}
+    ]
+  },
+  {
+    name:"Meetings &amp; Notes",
+    desc:"For partner calls, exec syncs, and not losing the thread of a deal in progress.",
+    shapeIdx:3,
+    tools:[
+      {name:"Granola", url:"https://www.granola.ai", use:"Bot-free capture, ideal for investor or partner calls where a visible recording bot would be awkward.", tag:"Bot-free"},
+      {name:"Fathom", url:"https://fathom.video", use:"Most generous free tier in the category, unlimited recording with roughly 30-second post-call summaries.", tag:"Best free tier"},
+      {name:"Fireflies", url:"https://fireflies.ai", use:"Deepest CRM integration, best when meeting notes need to flow straight into a pipeline or deal tool.", tag:"CRM-native"},
+      {name:"Otter", url:"https://otter.ai", use:"Best for live, collaborative transcripts and a shared, searchable archive across a team.", tag:"Team archive"}
+    ]
+  },
+  {
+    name:"Decks &amp; Presentations",
+    desc:"For the exec-level and partner-facing decks that actually need to look considered.",
+    shapeIdx:5,
+    tools:[
+      {name:"Gamma", url:"https://gamma.app", use:"Fastest prompt-to-polished-deck tool, now with an agent that can restyle a whole deck and add citations.", tag:"Fastest draft"},
+      {name:"Beautiful.ai", url:"https://www.beautiful.ai", use:"Rules-based layout engine, keeps every slide on-brand automatically as you edit, less rebuilding later.", tag:"Stays on-brand"}
+    ]
+  },
+  {
+    name:"Data &amp; Spreadsheets",
+    desc:"For turning a metrics export into an answer, without opening a notebook.",
+    shapeIdx:2,
+    tools:[
+      {name:"Julius AI", url:"https://julius.ai", use:"Purpose-built spreadsheet analyst, upload a file and ask questions in plain English, get the chart and the underlying code.", tag:"Spreadsheet-first"},
+      {name:"Claude (code execution)", url:"https://claude.ai", use:"Best when the analysis is one part of a bigger task, e.g. going straight from a dataset into a memo or a deck.", tag:"All-in-one"}
+    ]
+  },
+  {
+    name:"Browser Agents",
+    desc:"The newest category, an AI that can actually click around the web on your behalf.",
+    shapeIdx:6,
+    tools:[
+      {name:"Claude in Chrome", url:"https://claude.com/chrome", use:"Strongest at complex, multi-step desktop tasks, installs as a Chrome extension on top of your existing browser.", tag:"Most capable"},
+      {name:"Perplexity Comet", url:"https://www.perplexity.ai/comet", use:"Best for research-heavy browsing, free and available across desktop and mobile.", tag:"Free & cross-platform"}
+    ]
+  }
+];
+
+const FOOTNOTES = [
+  {id:"fn1", text:`Marty Cagan, <i>"Marty Cagan 2.0,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn2", text:`Gibson Biddle, <i>"Gibson Biddle,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn3", text:`Teresa Torres, <i>"Teresa Torres,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn4", text:`Casey Winters, <i>"Casey Winters,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn5", text:`Sean Ellis, <i>"Sean Ellis,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn6", text:`Brian Balfour, <i>"Brian Balfour,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn7", text:`Elena Verna, <i>"Elena Verna 4.0,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn8", text:`Amjad Masad, <i>"Amjad Masad,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn9", text:`Scott Wu, <i>"Scott Wu,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn10", text:`Mike Krieger, <i>"Mike Krieger,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn11", text:`Kim Scott, <i>"Kim Scott,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn12", text:`Jerry Colonna, <i>"Jerry Colonna,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn13", text:`Tobi Lütke, <i>"Tobi Lütke,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn14", text:`April Dunford, <i>"April Dunford 2.0,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn15", text:`Andy Raskin, <i>"Andy Raskin,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn16", text:`Madhavan Ramanujam, <i>"Madhavan Ramanujam,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn17", text:`Phyl Terry, <i>"Phyl Terry,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn18", text:`Katie Dill, <i>"Katie Dill,"</i> Lenny's Podcast transcript archive.`},
+  {id:"fn19", text:`Faros AI, "Best AI Coding Agents for 2026," faros.ai.`},
+  {id:"fn20", text:`Levelop, "Best AI Coding Agents 2026: Ranked by 90 Days of Use," levelop.dev.`},
+  {id:"fn21", text:`Lushbinary, "AI Coding Agents 2026 Comparison," lushbinary.com.`},
+  {id:"fn22", text:`meetingnotes.com, "The 10 Best AI Note Takers in 2026."`},
+  {id:"fn23", text:`get-alfred.ai, "Best AI Meeting Notetakers 2026."`},
+  {id:"fn24", text:`tooldirectory.ai, "AI Notetakers in 2026: Otter vs Granola vs Fireflies."`},
+  {id:"fn25", text:`toolsmadeeasy.com, "Best AI Presentation Makers of 2026."`},
+  {id:"fn26", text:`posteverywhere.ai, "15 Best AI Presentation Makers in 2026."`},
+  {id:"fn27", text:`aidenai.io, "Perplexity vs ChatGPT vs Claude: Best for Research in 2026."`},
+  {id:"fn28", text:`izzedo.chat, "Perplexity vs ChatGPT vs Claude in 2026."`},
+  {id:"fn29", text:`igmguru.com, "Julius AI Guide: Transform Your Data Analysis in 2026."`},
+  {id:"fn30", text:`findanomaly.ai, "Excel AI Data Analysis Tools: 10 Compared (2026)."`},
+  {id:"fn31", text:`dualmedia.com, "Best AI Browser Agents in 2026, Compared."`},
+  {id:"fn32", text:`nohacks.co, "The Agentic Browser Landscape in 2026" (OpenAI retired the standalone Atlas browser on August 9, 2026, folding it into the ChatGPT desktop app and a Chrome extension).`}
+];
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function renderCategories(){
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = CATEGORIES.map((cat,i)=>{
+    const color = COLORS[i % COLORS.length];
+    return `
+    <div class="cat-card" data-idx="${i}">
+      <div class="cat-top">
+        <div class="cat-shape">${shapeSvg(i,color)}</div>
+        <span class="cat-num">${String(i+1).padStart(2,'0')}</span>
+        <h3>${cat.title}</h3>
+        <p class="cat-teaser">${cat.teaser}</p>
+        <div class="cat-expand-hint">See the learnings <span class="arrow">&#9660;</span></div>
+      </div>
+      <div class="cat-body">
+        <div class="cat-body-inner">
+          ${cat.learnings.map(l=>`<div class="learning-item"><div class="learning-bullet" style="background:${color}"></div><div class="learning-text">${l}</div></div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  grid.querySelectorAll('.cat-card').forEach(card=>{
+    card.querySelector('.cat-top').addEventListener('click', ()=>{
+      const body = card.querySelector('.cat-body');
+      const isOpen = card.classList.contains('open');
+      if(isOpen){
+        body.style.maxHeight = null;
+        card.classList.remove('open');
+      } else {
+        card.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+}
+
+function renderTools(){
+  const wrap = document.getElementById('toolGroups');
+  wrap.innerHTML = TOOL_GROUPS.map((grp,gi)=>{
+    const color = COLORS[gi % COLORS.length];
+    return `
+    <div class="tool-group">
+      <div class="tool-group-head">
+        <div class="tool-group-icon" style="background:${color}">${shapeSvg(grp.shapeIdx,'#FFF7EC').replace('width="46"','width="26"').replace('height="46"','height="26"')}</div>
+        <div>
+          <h3>${grp.name}</h3>
+          <p class="tool-group-desc">${grp.desc}</p>
+        </div>
+      </div>
+      <div class="tool-cards">
+        ${grp.tools.map(t=>`
+          <a class="tool-card" href="${t.url}" target="_blank" rel="noopener">
+            <div class="tool-name">${t.name} <span class="go">&#8599;</span></div>
+            <div class="tool-use">${t.use}</div>
+            <span class="tool-tag" style="background:${color}22;">${t.tag}</span>
+          </a>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderFootnotes(){
+  const cols = document.getElementById('footnoteCols');
+  cols.innerHTML = FOOTNOTES.map((f,i)=>`<div class="footnote-row" id="${f.id}"><b>[${i+1}]</b> ${f.text}</div>`).join('');
+}
+
+function renderConfetti(){
+  const layer = document.getElementById('heroConfetti');
+  const shapesIdx = [0,1,2,3,4,5,6,7];
+  let html = '';
+  for(let i=0;i<16;i++){
+    const s = shapesIdx[Math.floor(Math.random()*shapesIdx.length)];
+    const c = COLORS[Math.floor(Math.random()*COLORS.length)];
+    const size = 20 + Math.random()*36;
+    const top = Math.random()*100;
+    const left = Math.random()*100;
+    const rot = Math.random()*360;
+    html += `<div class="confetti-shape" style="top:${top}%; left:${left}%; width:${size}px; height:${size}px; transform:rotate(${rot}deg);">${shapeSvg(s,c)}</div>`;
+  }
+  layer.innerHTML = html;
+}
+
+renderCategories();
+renderTools();
+renderFootnotes();
+renderConfetti();
+</script>
+</body>
+</html>
