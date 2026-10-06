@@ -5,417 +5,292 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fintech Newsletter Digest</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
+  * { box-sizing: border-box; }
   body {
+    margin: 0;
+    padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: #20223a;
-    min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
-    background: linear-gradient(120deg, #cfe0ff 0%, #d9d2fb 22%, #f3d6ef 45%, #ffe2ea 62%, #d7e4ff 80%, #cdeaf5 100%);
+    color: #1a1b2e;
+    background: linear-gradient(135deg, #e8eafd 0%, #f3e6fb 25%, #fce8f3 50%, #e6f2fb 75%, #ecf0fd 100%);
     background-size: 400% 400%;
-    animation: auroraShift 28s ease infinite;
+    animation: auroraShift 24s ease infinite;
+    min-height: 100vh;
   }
-
   @keyframes auroraShift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
-
-  .silk-glow {
+  .silk-layer {
     position: fixed;
-    inset: 0;
+    top: -20%; left: -20%; right: -20%; bottom: -20%;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(168,139,250,0.25), transparent 45%),      radial-gradient(circle at 80% 30%, rgba(244,163,210,0.22), transparent 45%),
+      radial-gradient(circle at 50% 80%, rgba(139,183,250,0.25), transparent 50%);
+    filter: blur(40px);
+    animation: drift 30s ease-in-out infinite alternate;
     z-index: 0;
     pointer-events: none;
-    overflow: hidden;
   }
-
-  .silk-glow span {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(70px);
-    opacity: 0.45;
-    mix-blend-mode: screen;
-    animation: drift 34s ease-in-out infinite;
-  }
-
-  .silk-glow span.g1 {
-    width: 46vw; height: 46vw; top: -10%; left: -8%;
-    background: radial-gradient(circle, #a5c8ff 0%, transparent 70%);
-    animation-delay: 0s;
-  }
-  .silk-glow span.g2 {
-    width: 50vw; height: 50vw; top: 20%; right: -12%;
-    background: radial-gradient(circle, #e3b8f5 0%, transparent 70%);
-    animation-delay: -10s;
-  }
-  .silk-glow span.g3 {
-    width: 40vw; height: 40vw; bottom: -12%; left: 20%;
-    background: radial-gradient(circle, #ffc9de 0%, transparent 70%);
-    animation-delay: -20s;
-  }
-
   @keyframes drift {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(4%, -6%) scale(1.08); }
+    0% { transform: translate(0,0) scale(1); }
+    100% { transform: translate(3%, 4%) scale(1.08); }
   }
-
   .wrap {
     position: relative;
     z-index: 1;
-    max-width: 920px;
+    max-width: 860px;
     margin: 0 auto;
-    padding: 36px 20px 64px;
+    padding: 36px 20px 80px;
   }
-
-  header.masthead {
+  header.page-head {
     text-align: center;
     margin-bottom: 36px;
   }
-
-  header.masthead h1 {
-    font-size: 2.3rem;
+  header.page-head h1 {
+    font-size: 2.1rem;
+    margin: 0 0 6px;
     font-weight: 800;
-    letter-spacing: -0.02em;
-    background: linear-gradient(90deg, #4c4fd6, #9a3fc0, #d1457a);
-    -webkit-background-clip: text;
-    background-clip: text;
+    background: linear-gradient(90deg, #6d4aff, #c14fb0, #4a7dff);
+    -webkit-background-clip: text;    background-clip: text;
     color: transparent;
-    margin-bottom: 8px;
+    letter-spacing: -0.02em;
   }
-
-  header.masthead .updated {
-    display: inline-block;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #3b3d58;
-    background: rgba(255,255,255,0.6);
-    border: 1px solid rgba(255,255,255,0.8);
-    backdrop-filter: blur(6px);
-    padding: 6px 16px;
-    border-radius: 999px;
+  header.page-head .updated {
+    font-size: 0.95rem;
+    color: #4a4a63;
+    font-weight: 500;
   }
-
   section.block {
-    margin-bottom: 40px;
+    margin-bottom: 34px;
   }
-
-  h2.section-title {
-    font-size: 1.05rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #2d2f4a;
-    margin-bottom: 16px;
-    padding-left: 2px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  section.block h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2a2048;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(109,74,255,0.25);
   }
-
-  h2.section-title::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #6a5cf0, #d1457a);
-    display: inline-block;
-    flex-shrink: 0;
+  .today-block h2 {
+    border-bottom-color: rgba(193,79,176,0.4);
   }
-
-  .today-block {
-    background: rgba(255,255,255,0.55);
-    border: 1px solid rgba(255,255,255,0.9);
-    border-radius: 26px;
-    padding: 22px;
-    backdrop-filter: blur(14px);
-    box-shadow: 0 8px 32px rgba(90, 70, 160, 0.12);
-  }
-
-  .category-block {
-    background: rgba(255,255,255,0.4);
-    border: 1px solid rgba(255,255,255,0.7);
-    border-radius: 26px;
-    padding: 22px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 28px rgba(90, 70, 160, 0.10);
-  }
-
   .card {
-    background: rgba(255,255,255,0.82);
-    border-radius: 18px;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.6);    border-radius: 18px;
     padding: 18px 20px;
     margin-bottom: 14px;
-    box-shadow: 0 4px 16px rgba(60, 40, 110, 0.07);
-    border: 1px solid rgba(255,255,255,0.9);
+    box-shadow: 0 8px 24px rgba(109,74,255,0.08);
   }
-
-  .card:last-child { margin-bottom: 0; }
-
   .card h3 {
-    font-size: 1.04rem;
+    margin: 0 0 8px;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: #211f3d;
-    margin-bottom: 7px;
+    color: #211a3d;
     line-height: 1.35;
   }
-
   .card p {
-    font-size: 0.93rem;
+    margin: 0 0 10px;
+    font-size: 0.97rem;
     line-height: 1.55;
-    color: #39395a;
-    margin-bottom: 8px;
+    color: #2d2a40;
   }
-
   .card .src {
-    font-size: 0.76rem;
-    color: #6f6f94;
+    font-size: 0.8rem;
+    color: #6b6584;
     font-style: italic;
-    border-top: 1px dashed rgba(100,100,140,0.25);
-    padding-top: 7px;
-    margin-top: 4px;
+    border-top: 1px dashed rgba(109,74,255,0.2);
+    padding-top: 8px;
+    margin-top: 2px;
   }
-
-  footer.note {
+  .category-wrap {
+    background: rgba(255,255,255,0.35);    border-radius: 22px;
+    padding: 20px 22px 8px;
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+  .no-news {
+    font-size: 0.95rem;
+    color: #4a4a63;
+    font-style: italic;
+  }
+  footer.page-foot {
     text-align: center;
     font-size: 0.8rem;
-    color: #4a4a6a;
-    margin-top: 30px;
-    opacity: 0.85;
-  }
-
-  @media (max-width: 600px) {
-    header.masthead h1 { font-size: 1.7rem; }
-    .today-block, .category-block { padding: 16px; border-radius: 20px; }
-    .card { padding: 14px 15px; }
+    color: #6b6584;
+    margin-top: 40px;
   }
 </style>
 </head>
 <body>
-<div class="silk-glow">
-  <span class="g1"></span>
-  <span class="g2"></span>
-  <span class="g3"></span>
-</div>
-
+<div class="silk-layer"></div>
 <div class="wrap">
 
-  <header class="masthead">
+  <header class="page-head">
     <h1>Fintech Newsletter Digest</h1>
-    <div class="updated">Last updated: October 2, 2026, 2:03 PM UTC</div>
+    <div class="updated">Last updated: Tuesday, October 6, 2026 - 09:20 UTC</div>
   </header>
 
-  <section class="block">
-    <h2 class="section-title">Today's News</h2>
-    <div class="today-block">
-
-      <div class="card">
-        <h3>Nubank Shuts Down Monzo Deal Speculation</h3>
-        <p>Nubank said it is not pursuing an acquisition of Monzo, ending speculation that began just days earlier when reports surfaced that the two banks were in talks over a deal reported at GBP 8-10 billion (see the valuation-gap story below). The denial closes out a week of back-and-forth coverage on a possible tie-up between Latin America's largest digital bank and the UK's Monzo.</p>
-        <div class="src">Source: Future of Banking, Oct 2, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Treasury Runs on AI Now: Sleep Tight?</h3>
-        <p>This Week in Fintech's China edition explores AI adoption inside corporate treasury functions under the headline "Treasury runs on AI now: Sleep tight?" The available excerpt was limited to the newsletter's standard greeting, so the specific companies or deployments covered in the piece were not included here.</p>
-        <div class="src">Source: This Week in Fintech (China), Oct 2, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>No, There Is Not Going to Be an Agentic Bank Run</h3>
-        <p>Nik Milanović's This Week in Fintech edition pushes back on fears that AI payment agents could trigger a destabilizing "agentic bank run," per the headline, with a teaser pointing to a separate, unrelated mention of OnlyFans. The underlying argument and supporting data in the full piece were not included in the available excerpt.</p>
-        <div class="src">Source: This Week in Fintech, Oct 2, 2026</div>
-      </div>
-
+  <section class="block today-block">
+    <h2>Today's News</h2>    <div class="card">
+      <h3>Modern Treasury applies to the OCC to pursue a bank charter</h3>
+      <p>Payments infrastructure company Modern Treasury has applied to the U.S. Office of the Comptroller of the Currency (OCC) to establish itself as a regulated bank, adding its own banking layer on top of its existing infrastructure business. The move follows a pattern of fintech infrastructure players seeking direct bank charters rather than relying solely on partner-bank relationships.</p>
+      <div class="src">Source: Future of Banking, October 6, 2026</div>
+    </div>
+    <div class="card">
+      <h3>Stripe data shows Europe's AI-commerce payment volume lagging the US</h3>
+      <p>Stripe co-founder and CEO Patrick Collison shared a three-year chart of payment volume from AI businesses processed on Stripe, comparing the US and Europe, and the newsletter describes the two lines as diverging sharply, with Europe well behind. Critics quoted in the piece noted the chart mainly reflects which AI companies (largely US labs such as Anthropic and OpenAI) run on Stripe's own rails, rather than a full picture of AI-driven commerce everywhere.</p>
+      <div class="src">Source: State of European Tech Newsletter (Atomico), October 6, 2026</div>
+    </div>
+    <div class="card">
+      <h3>OECD: one in three European workers bound by a non-compete</h3>
+      <p>The same newsletter cites new OECD research finding that one in three workers in Europe is bound by a non-compete clause, and that non-competes are linked to lower job mobility, slower wage growth and weaker productivity across Europe. It also notes Europe has about 325,000 AI workers (matching the US in headcount), but only 35% of them work at digital-native tech companies versus 54% in the US, with 48% instead "retrofitting" incumbent industries.</p>
+      <div class="src">Source: State of European Tech Newsletter (Atomico), October 6, 2026</div>
     </div>
   </section>
 
   <section class="block">
-    <h2 class="section-title">AI in Fintech &amp; Agentic Commerce</h2>
-    <div class="category-block">
-
+    <h2>AI in Fintech &amp; Agentic Commerce</h2>
+    <div class="category-wrap">
       <div class="card">
-        <h3>Meta's Muse: The Angel or Demon of Payments?</h3>
-        <p>Meta's AI agent Muse can now browse products, compare options, fill out checkout pages and complete payment on a consumer's behalf, with Stripe enabling the payment rail, according to the newsletter. The piece frames this as AI agents moving from conference-stage demos into live consumer payment flows.</p>
-        <div class="src">Source: Connecting the Dots in Fintech, Sep 28, 2026</div>
+        <h3>Mastercard expands Agent Pay with new trust and intelligence tools</h3>
+        <p>Mastercard is expanding its Agent Pay program with new trust and intelligence services, described as its latest move into agentic commerce and aimed at giving banks new tools to manage and trust AI-agent-initiated payments.</p>
+        <div class="src">Source: Connecting the dots in fintech (Marcel), October 1, 2026</div>
       </div>
-
       <div class="card">
-        <h3>Mastercard Is Bringing AI Into the B2B Payment Layer</h3>
-        <p>Mastercard launched Advanced B2B Analytics, a new AI-powered platform aimed at helping businesses act on the data generated by B2B payments, per the newsletter, which describes B2B payments as data-rich but historically hard to act on.</p>
-        <div class="src">Source: Connecting the Dots in Fintech, Sep 29, 2026</div>
+        <h3>Airwallex pushes "Agentic Banking" from copilot to execution</h3>
+        <p>Airwallex launched Global Agentic Business Accounts built on its AgentOS and "Kai" agent, with autonomous AI agents now able to manage cross-border FX and rebalance multi-currency balances in real time, a shift the newsletters frame as moving corporate finance away from periodic, batch-style operations toward continuous, autonomous treasury automation.</p>        <div class="src">Sources: Future of Banking, October 1, 2026; TWIF China (Ning Ye), October 2, 2026</div>
       </div>
-
       <div class="card">
-        <h3>Mastercard Adds a New Trust Layer for AI-Powered Payments</h3>
-        <p>Mastercard is expanding its Agent Pay program with new trust and intelligence services intended to help banks and merchants manage agentic commerce, according to the newsletter. This follows Mastercard's B2B analytics push three days earlier, underscoring a broader push by the network into agentic payment infrastructure.</p>
-        <div class="src">Source: Connecting the Dots in Fintech, Oct 1, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Airwallex Takes Agentic Banking From Copilot to Execution</h3>
-        <p>Airwallex launched a Global Agentic Business Account, which the newsletter describes as moving AI in finance beyond decision support ("copilot") into actual execution of banking and payment actions. Specific account capabilities beyond this framing were not detailed in the available excerpt.</p>
-        <div class="src">Source: Future of Banking, Oct 1, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Whose Agent Is It Anyway?</h3>
-        <p>This Week in Fraud's edition examines how autonomous shopping agents are arriving in commerce before clear rules or liability frameworks exist for them, per the headline and teaser. The specific cases or companies the piece analyzes were not included in the available excerpt.</p>
-        <div class="src">Source: This Week in Fraud (This Week in Fintech), Sep 29, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>How Should Platforms Be Thinking About Agentic Commerce?</h3>
-        <p>Nik Milanović's This Week in Fintech edition poses the question of how commerce and banking platforms should design around AI purchasing agents, alongside brief mentions of Erebor's expansion to Syria, a New York lawsuit against Polymarket, and Citi's new Commerce Media launch. Further detail on the core agentic commerce argument was not included in the available excerpt.</p>
-        <div class="src">Source: This Week in Fintech, Sep 25, 2026</div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="block">
-    <h2 class="section-title">Payments &amp; Embedded Finance</h2>
-    <div class="category-block">
-
-      <div class="card">
-        <h3>UK Banks Put Tokenised Deposits to Work</h3>
-        <p>Lloyds, NatWest and Barclays have completed interbank transactions using blockchain-based tokenised deposits, including two mortgage transactions, according to the newsletter. This marks tokenised deposits moving from pilot discussion into live interbank use among three of the UK's largest banks.</p>
-        <div class="src">Source: Connecting the Dots in Fintech, Sep 25, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>ACI Worldwide and Solaris Move SEPA Instant Payments Onto a New Infrastructure</h3>
-        <p>Solaris has gone live on ACI Worldwide's ACI Connetic platform, moving its SEPA Instant payments infrastructure onto a cloud-native system, per the newsletter, which frames instant payments as quickly becoming the baseline standard across Europe.</p>
-        <div class="src">Source: Connecting the Dots in Payments, Sep 25, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>ECB and Pix Could Connect Europe to Brazil's Instant Payments</h3>
-        <p>The European Central Bank is assessing whether its TIPS instant payment platform could be linked with Brazil's Pix system, which would let money move between Europe and Brazil as easily as a local instant payment, according to the newsletter. The piece describes this as an early-stage exploration rather than a confirmed integration.</p>
-        <div class="src">Source: Connecting the Dots in Payments, Sep 28, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Checkout.com Brings Jaywan to UAE Merchants</h3>
-        <p>Checkout.com has integrated Jaywan, the UAE's domestic card scheme, into its UAE acquiring platform, giving merchants a route to accept Jaywan-branded cards, per the newsletter.</p>
-        <div class="src">Source: Connecting the Dots in Payments, Sep 29, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Checkout.com Hits $750M - and Is Betting on AI Next</h3>
-        <p>Checkout.com crossed $750M in annualised net revenue, up 28% year over year, and the company is now positioning AI as its next growth area, according to the newsletter. The 28% growth figure is specifically tied to Checkout.com's annualised net revenue, per the source.</p>
-        <div class="src">Source: Connecting the Dots in Fintech, Sep 30, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Swift Is Connecting the Next Generation of Payments</h3>
-        <p>Swift is positioning itself as more than a messaging network between banks, increasingly acting as a layer connecting different payment systems, currencies and forms of money, with Citi cited as a participating bank, per the newsletter. Further specifics on the initiative's scope were cut off in the available excerpt.</p>
-        <div class="src">Source: Connecting the Dots in Payments, Sep 30, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Open USD Launches with Visa, Stripe and Mastercard Backing</h3>
-        <p>Mastercard, Stripe, Visa, Coinbase and Shopify are backing Open USD (OUSD), a newly launched dollar-pegged stablecoin, according to the newsletter. The backer list spans card networks, a payments processor and a major e-commerce platform.</p>
-        <div class="src">Source: Connecting the Dots in Payments, Oct 1, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Don't Bet Against Stablecoins</h3>
-        <p>The Public Ledger's authors argue that stablecoins are a durable part of the financial system rather than a passing trend, noting that they themselves were once skeptical of that view. The specific data or examples used to support the argument were not included in the available excerpt.</p>
-        <div class="src">Source: The Public Ledger (This Week in Fintech), Sep 30, 2026</div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="block">
-    <h2 class="section-title">Banking-as-a-Service &amp; Digital Banking</h2>
-    <div class="category-block">
-      <div class="card">
-        <h3>IBM Brings Swift Into the Digital Banking Mix</h3>
-        <p>IBM has added Swift integration to its digital banking platform, enabling banks to connect their digital banking services to the Swift network, per the newsletter. Further detail on which IBM product line this applies to was cut off in the excerpt.</p>
-        <div class="src">Source: Future of Banking, Sep 25, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Revolut Gets Closer to Launching in Argentina</h3>
-        <p>Revolut has received approval from the Central Bank of Argentina to acquire Banco Cetelem Argentina from BNP Paribas, a step toward launching in the Argentine market, according to the newsletter.</p>
-        <div class="src">Source: Future of Banking, Sep 28, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Nubank, Monzo and the Digital Bank Valuation Gap</h3>
-        <p>Future of Banking reported that Nubank was in talks to buy Monzo for an estimated GBP 8-10 billion, a valuation the newsletter highlighted as notably generous relative to Monzo's size, while Sifted Daily separately reported the same day that the sale talks had UK tech watchers worried. Nubank denied pursuing the acquisition on October 2 (see Today's News), closing out the story within the week.</p>
-        <div class="src">Source: Future of Banking and Sifted Daily, Sep 29, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Cecabank Is Building a Crypto Business for Banks</h3>
-        <p>Spanish banking group Cecabank is extending its crypto custody services across Europe so that other banks do not need to build crypto custody themselves, according to the newsletter.</p>
-        <div class="src">Source: Future of Banking, Sep 30, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Revolut Customers Hit by Fresh Security Breach</h3>
-        <p>Sifted Daily reported that Revolut customers were affected by a new security breach; the available excerpt did not include further specifics on the scope, cause or number of customers affected.</p>
-        <div class="src">Source: Sifted Daily, Sep 25, 2026</div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="block">
-    <h2 class="section-title">Funding &amp; M&amp;A</h2>
-    <div class="category-block">
-
-      <div class="card">
-        <h3>AI Leads Fintech Funding as Pagaya Closes $460M Debt Facility</h3>
-        <p>Pagaya closed a $460M debt facility, while Numeral and Go.AI secured the largest venture rounds of the period, with payments and digital-asset companies drawing capital broadly across markets, according to the newsletter. The "largest venture rounds" distinction is specifically attributed to Numeral and Go.AI by the source, not to fintech funding overall.</p>
-        <div class="src">Source: This Week in Fintech, Sep 26, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Priority Technology Goes Private in $1.6B Deal</h3>
-        <p>Priority Technology is going private in a deal valued at $1.6B, per the newsletter, which also noted that Airtel Money is eyeing a major London IPO and that Avant has applied to become a bank.</p>
-        <div class="src">Source: This Week in Fintech, Sep 27, 2026</div>
-      </div>
-
-      <div class="card">
-        <h3>Here Are the Most Newsworthy Companies in Accounting</h3>
-        <p>The Accounting VC newsletter marked its one-year anniversary with this edition. The available excerpt covered the anniversary note but did not include the actual list or names of the "most newsworthy" accounting companies referenced in the headline.</p>
-        <div class="src">Source: The Accounting VC, Sep 29, 2026</div>
+        <h3>Pushback on the "agentic bank run" thesis, and McKinsey's take on what's at stake</h3>
+        <p>Apollo economist Torsten Slok's thesis that consumer AI agents could trigger an "agentic bank run" (automatically sweeping household cash into accounts paying 3.3% to 5.0%, instead of the 0.1% US national average) drew a detailed rebuttal in This Week in Fintech, arguing human switching friction makes mass agent-driven account-hopping unlikely any time soon. Separately, the same week's issue cites McKinsey's Global Payments Report estimating that agentic AI could put $75 billion of global payments revenue at risk by 2030 (via idle-cash migration and customers avoiding card fees and interest), while also estimating gen/agentic AI could deliver up to $110 billion in annual productivity gains for payments providers.</p>
+        <div class="src">Source: This Week in Fintech (Nik Milanović; Fundraises edition), October 2-3, 2026</div>
       </div>
     </div>
   </section>
 
   <section class="block">
-    <h2 class="section-title">Regulatory &amp; Policy / Regional Watch</h2>
-    <div class="category-block">
-
+    <h2>Payments &amp; Embedded Finance</h2>
+    <div class="category-wrap">
       <div class="card">
-        <h3>There Is Hard Mode... and Then There Is Africa</h3>
-        <p>The Central Bank of Kenya has proposed capital requirements of up to $1.93M for Kenyan payment firms, according to This Week in Fintech's Africa edition.</p>
-        <div class="src">Source: This Week in Fintech (Africa), Sep 28, 2026</div>
+        <h3>Checkout.com crosses $750M in annualised net revenue, up 28% YoY</h3>
+        <p>Checkout.com hit $750 million in annualised net revenue, up 28% year over year, with the newsletter framing AI as the next area the company is betting on for growth (specifics on that bet weren't detailed in the available excerpt).</p>
+        <div class="src">Source: Connecting the dots in fintech (Marcel), September 30, 2026</div>
       </div>
-
       <div class="card">
-        <h3>India Insurance Regulator Plays Barber, Insurtech Stocks Get a Trim</h3>
-        <p>This Week in Fintech's Asia &amp; India edition reports that action by India's insurance regulator trimmed insurtech stock valuations, per the headline. The specific regulatory measure and the insurtech companies affected were not included in the available excerpt.</p>
-        <div class="src">Source: This Week in Fintech (Asia &amp; India), Sep 28, 2026</div>
+        <h3>Swift pushes cross-border interoperability further with pay-by-alias</h3>
+        <p>Swift is positioning itself as more than a messaging network between banks, aiming to connect different payment systems, currencies and forms of money. Concretely, it launched a pay-by-alias initiative that lets users send cross-border payments using just a mobile number or email address, live with more than 100 banks.</p>
+        <div class="src">Sources: Connecting the dots in Payments, September 30, 2026; TWIF Asia &amp; India (Osborne Saldanha), October 5, 2026</div>
       </div>
-
       <div class="card">
-        <h3>Brazil Tops, Neighbors Pop</h3>
-        <p>Brazil has Latin America's largest crypto economy, valued at $252.5 billion, according to This Week in Fintech. This figure is specifically attributed to Brazil's crypto economy by the source, not to the wider Latin American market.</p>
-        <div class="src">Source: This Week in Fintech, Sep 30, 2026</div>
-      </div>
+        <h3>Open USD stablecoin launches with Visa, Mastercard, Stripe, Shopify and Coinbase</h3>
+        <p>A new dollar stablecoin, Open USD (OUSD), launched with Visa, Mastercard, Stripe, Shopify and Coinbase as founding backers, led by Zach Abrams (founder of Bridge, which Stripe acquired). More than 100 companies have signed on, including PayPal, American Express, Adyen, Klarna, Affirm, Chime, BNY, U.S. Bank, Citizens and Lead Bank. In parallel, 21 banks including Goldman Sachs, Bank of America and Citi are building a separate dollar stablecoin, and 37 institutions have formed a group called Qivalis to issue a euro stablecoin this year.</p>
+        <div class="src">Sources: Connecting the dots in Payments, October 1, 2026; This Week in Fintech / The Public Ledger (Jevgenijs Kazanins &amp; Bob Hammel), September 30, 2026</div>
+      </div>    </div>
+  </section>
 
+  <section class="block">
+    <h2>Banking-as-a-Service &amp; Capital</h2>
+    <div class="category-wrap">
+      <div class="card">
+        <h3>Mizuho and IFC launch $1bn SME supply-chain finance facility for Asia-Pacific</h3>
+        <p>Mizuho Bank partnered with the International Finance Corporation (IFC) to launch a $1 billion supply-chain finance facility specifically for small and medium-sized enterprises across Asia-Pacific.</p>
+        <div class="src">Source: TWIF Asia &amp; India (Osborne Saldanha), October 5, 2026</div>
+      </div>
+      <div class="card">
+        <h3>HSBC names its Hong Kong stablecoin "HSBC RedCoin"</h3>
+        <p>HSBC named its upcoming Hong Kong stablecoin "HSBC RedCoin" ahead of a phased rollout, which will be embedded directly in its PayMe payment app and HSBC HK mobile banking app for everyday peer-to-peer transfers and merchant payments, alongside a public digital-asset education campaign.</p>
+        <div class="src">Source: TWIF China (Ning Ye), October 2, 2026</div>
+      </div>
+      <div class="card">
+        <h3>Cecabank builds out crypto custody for European banks</h3>
+        <p>Spanish banking group Cecabank is extending its crypto custody services across Europe, positioning itself as infrastructure other banks can plug into rather than having each bank build crypto custody in-house.</p>
+        <div class="src">Source: Future of Banking, September 30, 2026</div>
+      </div>
     </div>
   </section>
-  <footer class="note">
-    Curated from newsletters received in the Newsletters folder over the past 7 days. Some items reflect only the preview text available at the time of generation.
+
+  <section class="block">
+    <h2>Funding &amp; M&amp;A</h2>
+    <div class="category-wrap">
+      <div class="card">        <h3>Valley National to buy Bluevine for $340M; Stripe to acquire Parafin</h3>
+        <p>Valley National Bancorp agreed to acquire small-business fintech Bluevine for approximately $340 million, which brings Valley $2.1 billion in deposits and, per executives quoted in the newsletter, makes it "a much stronger and more relevant small business competitor." The same week, Stripe agreed to acquire small-business financing provider Parafin, and Capitolis struck a $200 million deal for eSecLending.</p>
+        <div class="src">Source: This Week in Fintech (Suman Bhattacharyya; Exits &amp; Deep Reads), October 4, 2026</div>
+      </div>
+      <div class="card">
+        <h3>EliseAI leads a busy week of fintech-adjacent fundraises</h3>
+        <p>EliseAI, an AI platform for housing and healthcare operations, raised $350 million at a $4 billion valuation, led by Andreessen Horowitz and Bessemer Venture Partners. Homeward, a cash-backed home financing platform, secured $120 million in Series D equity plus $330 million in debt financing, and Jeeves, a stablecoin-based business banking platform, raised $110 million in equity funding.</p>
+        <div class="src">Source: This Week in Fintech (Suman Bhattacharyya; Fundraises edition), October 3, 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Regulatory &amp; Policy</h2>
+    <div class="category-wrap">
+      <div class="card">
+        <h3>European regulators probe Binance over EU customer exemption</h3>
+        <p>European financial regulators are examining Binance's use of a "reverse solicitation" exemption, which it has used to continue serving EU customers without the full authorization normally required under EU rules; the newsletter's description of exactly which licensing requirement is at issue was cut off in the available excerpt.</p>
+        <div class="src">Source: TWIF China (Ning Ye), October 2, 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Regional Watch: UK / EU</h2>
+    <div class="category-wrap">
+      <div class="card">
+        <h3>Revolut vs Nubank: the neobank rivalry goes global</h3>        <p>This Week in Fintech laid out a head-to-head FY25 scorecard: Nubank (founded 2013, Sao Paulo) reported 131 million customers, $16.3B revenue, $2.9B profit, 45% growth, $41.9B deposits and a $32.7B credit portfolio at a $67B valuation (publicly listed); Revolut (founded 2015, London) reported 68 million FY25 customers (80 million+ currently), $6B revenue, $1.7B profit, 46% growth, $67.5B deposits, a $2.9B credit portfolio, 800K business customers and a $115B valuation (private). Both are reportedly pursuing US banking charters. Revolut obtained a banking license in Colombia, one of Nubank's core markets, and separately won approval from Argentina's central bank (BCRA) to acquire Banco Cetelem Argentina, to be renamed Revolut Bank Argentina ahead of a planned 2027 public launch. Nubank, for its part, was reported to be considering an acquisition of Monzo.</p>
+        <div class="src">Sources: This Week in Fintech (Daniel Cronin &amp; Matt Jones), October 1, 2026; TWIF LatAm (Vivi Giacaman), September 30, 2026</div>
+      </div>
+      <div class="card">
+        <h3>Nubank denies Monzo deal, then Monzo turns to a 15% stake sale</h3>
+        <p>Nubank stated it is not pursuing an acquisition of Monzo, shutting down the deal speculation reported earlier in the week. Days later, Monzo was reported to be seeking a private-equity buyer for up to a 15% stake in the UK digital bank.</p>
+        <div class="src">Sources: Future of Banking, October 2, 2026 and October 5, 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Regional Watch: LatAm</h2>
+    <div class="category-wrap">
+      <div class="card">
+        <h3>Brazil tops global crypto adoption, but its own crypto economy shrank</h3>
+        <p>Brazil ranked as the world's top country for crypto adoption on Chainalysis's new index and has Latin America's largest crypto economy at $252.5 billion, even though Brazil's own crypto economy actually shrank 1.6% in the year to June while the broader Latin America region grew 9.8%, led by Venezuela (+107.2%), Mexico (+25.5%), Argentina (+15.3%) and Colombia (+13.8%). Brazil's central bank turned down its first crypto license application this week. Elsewhere in the region, Apple launched Tap to Pay on iPhone in Argentina with Mercado Pago as its sole initial partner, one of eight Latin American markets in the rollout.</p>
+        <div class="src">Source: TWIF LatAm (Vivi Giacaman), September 30, 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Regional Watch: APAC</h2>
+    <div class="category-wrap">
+      <div class="card">
+        <h3>Apple Pay lands in India; Hong Kong and Singapore post strong fintech numbers</h3>
+        <p>Apple Pay launched in India with Axis Bank across iPhone, iPad and Apple Watch. Indian lending app Moneyview debuted above a $1 billion valuation after its IPO was 98.5x subscribed. In Hong Kong, virtual banks ZA Bank ($7.2M net profit, up 44%) and Mox Bank both turned profitable in H1 2026. Singapore's crypto economy surged 55.4% to $284 billion in H1 2026, and StraitsX launched XSGD, the first Singapore-dollar stablecoin natively issued on the Monad network.</p>        <div class="src">Source: TWIF Asia &amp; India (Osborne Saldanha), October 5, 2026</div>
+      </div>
+      <div class="card">
+        <h3>Binance Pay links with Japan's PayPay; Hong Kong and Indonesia explore linked QR payments</h3>
+        <p>Binance Pay integrated with Japan's PayPay merchant network via HIVEX, letting eligible overseas visitors pay with digital assets across Japan while merchants are settled in local yen. Separately, the Hong Kong Monetary Authority and Bank Indonesia signed an MOU to explore linking their respective QR payment systems for faster, lower-cost cross-border payments.</p>
+        <div class="src">Source: TWIF China (Ning Ye), October 2, 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Regional Watch: Africa</h2>
+    <div class="category-wrap">
+      <div class="card">
+        <h3>Airtel Money's London listing prices at a $7bn valuation</h3>
+        <p>Airtel Africa priced its mobile-money subsidiary Airtel Money's London Stock Exchange listing at a $7 billion valuation ($2.60 per share), below the $8 billion-plus figures bankers had floated earlier this year. The listing was structured as an institutional secondary sale, with existing shareholders offloading a 270-million-share block worth roughly $700 million, and a tight 16.5% free float calibrated for sovereign-wealth and other deep-pocketed institutional buyers rather than retail investors.</p>
+        <div class="src">Source: TWIF Africa (Jovin Bosco), October 5, 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    Compiled automatically from newsletters in the Newsletters folder, last 7 days.
   </footer>
 
 </div>
