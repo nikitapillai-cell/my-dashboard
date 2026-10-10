@@ -227,16 +227,17 @@
   .meet-id .when{ font-size:11.5px; color:var(--orange); font-weight:700; margin-top:4px; letter-spacing:0.01em; }
   .meet-card .what{ font-size:13.5px; color:var(--ink); line-height:1.6; margin:0; }
   .meet-card .what b{ font-weight:700; }
-  .synergy{
+  .actions{
     background:var(--cream); border-radius:14px; padding:14px 16px;
     font-size:13px; line-height:1.55; color:#3c2a24;
   }
-  .synergy .lbl{ display:block; font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--green-2); margin-bottom:6px; }
-  .actions{
-    border:1.5px dashed #c9cdd1; border-radius:14px; padding:14px 16px;
-  }
-  .actions .lbl{ display:block; font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--gray); margin-bottom:6px; }
-  .actions p{ margin:0; font-size:12.5px; color:#9a9a9f; font-style:italic; line-height:1.55; }
+  .actions .lbl{ display:block; font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:var(--green-2); margin-bottom:6px; }
+  .actions p{ margin:0 0 8px; font-size:13px; color:#3c2a24; line-height:1.55; }
+  .actions p:last-child{ margin-bottom:0; }
+  .actions ul{ margin:0; padding-left:18px; }
+  .actions ul li{ font-size:13px; color:#3c2a24; line-height:1.55; margin-bottom:4px; }
+  .actions ul li:last-child{ margin-bottom:0; }
+  .actions a{ color:var(--green-2); font-weight:600; text-decoration:underline; }
   .flagnote{ font-size:11px; color:#b3765f; font-style:italic; margin:0; }
 
   /* PHOTO SECTION */
@@ -358,7 +359,7 @@
   <div class="wrap">
     <span class="section-label">Who we met</span>
     <h2 class="section-title">Meetings &amp; partnership synergies</h2>
-    <p class="section-sub">Fourteen 1:1 meetings and events across the two days, each assessed against where it could plausibly connect to QuickBooks' international strategy. Action items below are placeholders — add the real takeaways after reviewing your notes from each meeting.</p>
+    <p class="section-sub">Fourteen 1:1 meetings and events across the two days, with key takeaways and next steps from each.</p>
 
     <div class="meet-grid">
 
@@ -368,8 +369,16 @@
           <div class="meet-id"><h4>Conrad Ford</h4><div class="role">CPO &amp; CSO, Allica Bank</div><div class="when">Tue 6 Oct · 10:45–11:00</div></div>
         </div>
         <p class="what">UK SME challenger bank — ~£4bn in SME loans and £5bn deposits, recently acquired Kriya for embedded working capital and invoice finance.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Allica's QuickBooks bank feed is currently one-directional; Intuit's Open Banking Payments could close that gap. Kriya's embedded working-capital push mirrors a QuickBooks Capital-style play in the UK.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span>
+          <ul>
+            <li>Keen to explore mid-market distribution and accounting-distribution partnerships for Allica × QuickBooks in the UK.</li>
+            <li>Most excited about building an embedded/integrated cash management platform between a mid-market bank like Allica and an accounting platform — he sees a gap between what banking platforms and accounting platforms each serve, around agentic or supported cash management for mid-market and SMBs alike.</li>
+            <li>The mid-market is where the highest-value customers and the largest deposits sit, so that's where a cash management solution would create the most value for both Allica and Intuit.</li>
+            <li>The integrated flow he has in mind would require a mid-market customer to hold both an Allica bank account and a QuickBooks licence.</li>
+            <li>This was explored a year ago with Patrick Johnson and Neil Oates, but dropped when Patrick moved to other priorities amid Intuit's restructuring. (See attached deck Conrad presented to Neil and Patrick at the time.)</li>
+          </ul>
+          <p><b>Next step:</b> set up time between Ishan, Conrad, and the new payments PMM/PM once they're in seat (a few weeks out). Not an FY27 opportunity, but a strong candidate for FY28 given our P0 to grow mid-market — Allica's accountant base (firms serving larger clients) fits well, though it's a heavier product/engineering lift.</p>
+        </div>
       </div>
 
       <div class="meet-card">
@@ -378,8 +387,7 @@
           <div class="meet-id"><h4>Alexandre Fernandes</h4><div class="role">VP Western Europe, Solidgate</div><div class="when">Tue 6 Oct · 11:00–11:15</div></div>
         </div>
         <p class="what">Payment orchestration and acquiring platform for fast-scaling online businesses — 500+ merchants across 150+ countries.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Cross-border acquiring could extend QBO merchant payment acceptance beyond US rails. Solidgate Capital (financing against recurring revenue) runs parallel to QuickBooks Capital — worth a data-sharing conversation.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>A general education meeting on the payments orchestration / cross-border acquiring platform Solidgate runs. No specific follow-up planned.</p></div>
       </div>
 
       <div class="meet-card">
@@ -388,8 +396,11 @@
           <div class="meet-id"><h4>Erik Olson</h4><div class="role">Plaid <span style="font-weight:400;">(title unverified)</span></div><div class="when">Tue 6 Oct · time TBD</div></div>
         </div>
         <p class="what">US financial data network — 12,000+ institutions connected, 95% US bank coverage, new financial-foundation models launched in 2026.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Could supplement QuickBooks' international bank-feed coverage where Intuit's own network is thinner, and its new transaction/income classification models are worth evaluating as a third-party enrichment layer.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span>
+          <p>A recap meeting on where things stand exploring Plaid as a bank-connectivity partner. Neil Oates already owns this conversation with Plaid directly.</p>
+          <p>Neil needs more regional coverage in APAC, the Middle East and Africa than Plaid or Yapli currently offer, so he'll likely look to additional regional players beyond Yapli there.</p>
+          <p>Full status of bank connectivity, Neil's conversations, and the partner landscape: <a href="https://docs.google.com/document/d/1Jb_FR8zzHnab-v5xxrJu4eUoXEY-qPCjVTuKUmAHVZU/edit?tab=t.0#heading=h.i2tjvlrunil" target="_blank" rel="noopener">bank connectivity doc</a> and <a href="https://github.intuit.com/pages/noates/micropages/intl-market-connectivity/#tab=overview" target="_blank" rel="noopener">intl market connectivity micropage</a> (internal, Intuit access only).</p>
+        </div>
       </div>
 
       <div class="meet-card">
@@ -398,8 +409,15 @@
           <div class="meet-id"><h4>Prashant Fuloria</h4><div class="role">CEO, Fundbox</div><div class="when">Tue 6 Oct · 12:00–12:30</div></div>
         </div>
         <p class="what">Embedded working-capital platform, rebranded in 2025 as "embedded capital infrastructure" — 190,000+ small businesses helped.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>A legacy QuickBooks integration already exists (since 2015) but looks dormant. Fundbox's newer embedded-capital playbook (EverCommerce, Australia) suggests a path to reviving and extending it into UK and Canada.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span>
+          <ul>
+            <li>Fundbox is launching its first UK product (embedded lending) in Q1 2027, on top of an existing UK partner — believed to be EverCommerce.</li>
+            <li>Very keen to explore embedded working capital with Intuit for the UK on the back of that launch, and interested in expanding with us in the US and Canada too (Canada solution also live only from early next year).</li>
+            <li>Beyond embedded lending, they can also refer customers to a Fundbox-branded page/platform — Fundbox owns risk, decisioning, disbursement and servicing — though embedded infrastructure is their more common model.</li>
+            <li>Prashant is keen to treat this as a lighthouse partner for their international expansion, but wants clarity on how firm embedded lending actually is on our roadmap.</li>
+          </ul>
+          <p><b>Next step:</b> Dani is the main point of contact, in touch with Fundbox on the UK opportunity (targeting sole traders). Prashant can get involved if useful.</p>
+        </div>
       </div>
 
       <div class="meet-card">
@@ -408,8 +426,7 @@
           <div class="meet-id"><h4>Diego Fernandes</h4><div class="role">Ant Group <span style="font-weight:400;">(identity unverified)</span></div><div class="when">Tue 6 Oct · 3:00–3:30</div></div>
         </div>
         <p class="what">Ant International's global payments infra — Alipay+, Antom and WorldFirst — connected to 150M+ merchants across 220+ markets.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Alipay+/Antom acceptance inside QBO Payments could open Asian wallet acceptance for international customers. WorldFirst's FX rails could support multi-currency invoicing directly in QuickBooks.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>An exploratory BD conversation to understand Alipay's global payments infrastructure. They acquired WorldFirst a couple of years ago and have significant global coverage, with their sweet spot in Southeast Asia, Asia Pacific and China — worth a closer look if we're prioritising those markets. Their FX rails could support multi-currency invoicing directly in QuickBooks, and they can facilitate cross-border payments across a number of markets.</p></div>
       </div>
 
       <div class="meet-card">
@@ -418,8 +435,7 @@
           <div class="meet-id"><h4>Andreas Ioannou</h4><div class="role">Senior Associate, Fintech Collective</div><div class="when">Tue 6 Oct · 4:30–5:00</div></div>
         </div>
         <p class="what">NY/London seed-to-Series B fintech VC; portfolio includes Simetrik (reconciliation) and Contabilizei (Brazilian SMB accounting).</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Useful early-stage signal source for accounting-automation and embedded-lending startups in the UK and Europe.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>Very useful for market mapping — takeaways on AR/AP platforms, lending platforms, and AI-native accounting tech that's emerged across the UK and Europe over the last year or two, plus adjacent platforms worth keeping on the radar (e.g. Ravical, which saw an uptick in app connections a couple of months ago). Good signal on what's coming and growing in the market.</p></div>
       </div>
 
       <div class="meet-card">
@@ -428,8 +444,7 @@
           <div class="meet-id"><h4>YouLend</h4><div class="role">Embedded revenue-based financing</div><div class="when">Tue 6 Oct · 5:15–6:00</div></div>
         </div>
         <p class="what">Already a live launch partner for the QuickBooks UK Capital Marketplace (Feb 2026) — 370,000+ businesses funded globally, backed by a £4bn J.P. Morgan facility.</p>
-        <div class="synergy"><span class="lbl">Existing Partnership</span></div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
       </div>
 
       <div class="meet-card">
@@ -438,8 +453,7 @@
           <div class="meet-id"><h4>Shapers &amp; Opera Tech Ventures</h4><div class="role">Philippe &amp; Thomas Teixeira da Mota</div><div class="when">Tue 6 Oct · Cantinho do Avillez</div></div>
         </div>
         <p class="what">Shapers (€75m early-stage fintech VC) and Opera Tech Ventures (BNP Paribas's VC arm) co-run the conference's Startup Pitch competition.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>A relationship-building and deal-flow event — useful ongoing signal source for emerging European fintech worth tracking for partnership or competitive purposes.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>Same brief as Fintech Collective: identify AR/AP, embedded-lending or accounting-adjacent platforms with SMB, mid-market or accountant ICPs. Shapers' coverage skews mainland Europe rather than the UK, but still a helpful conversation.</p></div>
       </div>
 
       <div class="meet-card">
@@ -448,8 +462,13 @@
           <div class="meet-id"><h4>Manuel Sandhofer</h4><div class="role">GM Europe, Middle East &amp; LatAm, Wise Platform</div><div class="when">Wed 7 Oct · 10:00–10:20 + lunch 12:00–1:00</div></div>
         </div>
         <p class="what">Wise Platform powers cross-border infrastructure for Monzo, N26, Nubank and (new in FY26) UniCredit — £181bn+ in FX volume moved.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Given the panel context, this was the deepest relationship-building conversation of the trip — worth exploring whether Wise Platform's correspondent and API rails could support QuickBooks' own cross-border payment ambitions.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span>
+          <ul>
+            <li>Explored using the cross-border Wise platform to pay invoices in multiple currencies internationally — priority market is Canada, where we see more multi-currency-enabled accounts and where Wise sees its highest cross-border payments penetration of any market today.</li>
+            <li>Wise is also interested in a distribution partnership: either a simple referral/marketing arrangement, or a marketing partnership with a product element involving "Pay with Wise," if Solutions Engineering could build it.</li>
+          </ul>
+          <p><b>Next step:</b> managing expectations that this is further out in planning and roadmap — wait for the Canada lead and payments PM/PMM to be in seat before taking this further.</p>
+        </div>
       </div>
 
       <div class="meet-card">
@@ -458,8 +477,7 @@
           <div class="meet-id"><h4>Nacho Gironella Merino</h4><div class="role">Head of Sales Europe, Paymentology</div><div class="when">Wed 7 Oct · 11:15–11:30</div></div>
         </div>
         <p class="what">Cloud-native card issuer-processor for banks, fintechs and telcos across 68 countries, including M-Pesa and Wio Bank.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Expense management is an explicitly named use case on Paymentology's own site — a plausible fit for QBO-linked business or expense cards in markets where Intuit has no issuing infrastructure of its own. Inference, not an existing relationship.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>A general introductory meeting to understand what Paymentology does. No specific follow-up planned at this stage.</p></div>
       </div>
 
       <div class="meet-card">
@@ -468,8 +486,7 @@
           <div class="meet-id"><h4>Adam Slater</h4><div class="role">Strategic Partnership Development Director, Likewize</div><div class="when">Wed 7 Oct · 11:30–11:45</div></div>
         </div>
         <p class="what">Device protection, insurance and repair infrastructure distributed white-label through banks and telcos — $1.2bn revenue, 30+ countries.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>White space rather than a confirmed fit: embedding device protection as an add-on within QBO's asset or expense tracking for small businesses that depend on POS hardware, laptops and phones.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>A general introductory meeting to understand what Likewize does. No specific follow-up planned at this stage.</p></div>
       </div>
 
       <div class="meet-card">
@@ -478,8 +495,7 @@
           <div class="meet-id"><h4>Shahar Friedman</h4><div class="role">Head of Payments, Utila</div><div class="when">Wed 7 Oct · 2:00–2:15</div></div>
         </div>
         <p class="what">Stablecoin and digital-asset custody infrastructure (MPC wallets) — 200+ clients processing $15bn+ in monthly volume.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Early-stage only: a technical and compliance scoping conversation on whether custody/compliance infra like Utila's could eventually underpin a QBO pilot for high-friction corridors such as US–Latin America supplier payments.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>A meeting to understand Utila's stablecoin offering. Mainly relevant to what we're doing in the US right now, and less so for international markets.</p></div>
       </div>
 
       <div class="meet-card">
@@ -488,8 +504,7 @@
           <div class="meet-id"><h4>Zaccaria Aghemio</h4><div class="role">Pliant <span style="font-weight:400;">(title unverified)</span></div><div class="when">Wed 7 Oct · 3:45–4:00</div></div>
         </div>
         <p class="what">Berlin "Card &amp; Spend OS" — direct corporate cards plus a Cards-as-a-Service model already used by Commerzbank. 3,500+ businesses served.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Pliant's proven Cards-as-a-Service rails could let QuickBooks launch a QBO-branded corporate card and spend-management product in Europe without becoming a card issuer itself, with expense data syncing directly into QBO.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>Pliant offers a cards-as-a-service model and has already been in talks with our US teams on this. Less relevant to what we're doing in the UK right now.</p></div>
       </div>
 
       <div class="meet-card">
@@ -498,8 +513,7 @@
           <div class="meet-id"><h4>Olga Shikhantsova</h4><div class="role">Head of Product Strategy, Finom</div><div class="when">Wed 7 Oct · from 4:00</div></div>
         </div>
         <p class="what">EMI-licensed SME banking — business accounts, invoicing, expense management and AI-enabled bookkeeping; 125,000 customers across 5 EU markets.</p>
-        <div class="synergy"><span class="lbl">Synergy</span>Closest direct adjacency to QuickBooks' own accounting and SMB banking ambitions in Europe — a useful competitive and product benchmark, particularly on AI-enabled bookkeeping.</div>
-        <div class="actions"><span class="lbl">Action items</span><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Add key takeaways and next steps here.</p></div>
+        <div class="actions"><span class="lbl">Key Takeaways</span><p>Very interesting one. Finom is an EMI-licensed SMB/SME bank, led by a team with deep fintech and VC experience in Europe. Currently focused on mainland Europe, with Germany, Spain and France as their largest markets. They have very good product-market fit as an accounting-tech (bookkeeping) platform across mainland Europe — Germany, Spain, France, Italy and the Netherlands.</p></div>
       </div>
 
     </div>
